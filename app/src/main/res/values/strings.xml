@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="edit_message">Enter a Message</string>
     <string name="button_send">Send</string>
+    <string name="refresh">Refresh</string>
+    <string name="Fotag_WZ">Fotag</string>
+    <string name="star">Star</string>
+    <string name="clear">close</string>
 </resources>
