@@ -16,10 +16,10 @@ import java.util.Observer;
 public class Model extends Observable implements Serializable{
     public static int selected_star = 0;
     public Context context;
-    public ArrayList<ImageView> image_pool;
+    public ArrayList<Card> card_pool;
 
     public Model(Context context) {
-        this.image_pool = new ArrayList<>();
+        this.card_pool = new ArrayList<>();
         this.context = context;
     }
 
@@ -29,16 +29,16 @@ public class Model extends Observable implements Serializable{
         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         ImageView iv_bunny = new ImageView(context);
         iv_bunny.setImageBitmap(bmp);
-        image_pool.add(iv_bunny);
+        //image_pool.add(iv_bunny);
     }
 
     public void addImage(ImageView image) {
-        this.image_pool.add(image);
+        //this.image_pool.add(image);
         this.notifyObservers();
     }
 
     public void clear_image() {
-        this.image_pool = new ArrayList<>();
+        this.card_pool = new ArrayList<>();
         notifyObservers();
     }
 

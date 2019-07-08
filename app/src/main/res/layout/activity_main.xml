@@ -8,7 +8,7 @@
     tools:context=".MainActivity" >
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/float_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -70,7 +70,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/cd_view_2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="209dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,6 +94,70 @@
                     android:numStars="5"
                     android:scrollbarSize="4dp"
                     android:stepSize="1.0" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cd_view_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/im3"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/display_image"
+                    android:scaleType="fitCenter" />
+
+                <RatingBar
+                    android:id="@+id/b3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:scrollbarSize="4dp"
+                    android:stepSize="1.0"
+                    />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cd_view_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/im4"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/display_image"
+                    android:scaleType="fitCenter" />
+
+                <RatingBar
+                    android:id="@+id/b4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:scrollbarSize="4dp"
+                    android:stepSize="1.0"
+                    />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
