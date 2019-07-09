@@ -1,28 +1,50 @@
 package com.example.h86zhu.myapplication;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import android.widget.LinearLayout;
 
 public class  MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public Model model;
-    public static ArrayList<CardView> image_gal;
+    public static ArrayList<Card> image_gal;
+    String[] urls = {
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/bunny.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/chinchilla.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/doggo.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/fox.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/hamster.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/husky.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/kitten.png",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/loris.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/puppy.jpg",
+            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/sleepy.png"
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ArrayList<Card> contacts;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         setContentView(R.layout.activity_main);
-        image_gal = new ArrayList<>();
+        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+
+        model = new Model(this);
+
+        recList.setLayoutManager(llm);
+        Card_Adpater ca = new Card_Adpater(this,model);
+        recList.setAdapter(ca);
+
+/*
+
         //dispatch to disfferent classes
 
         /*model = new Model(this);
@@ -32,7 +54,7 @@ public class  MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.single_card);
         FloatingActionButton fl_button = (FloatingActionButton) findViewById(R.id.float_button);
 
         image_gal.add((CardView) findViewById(R.id.cd_view_1));
