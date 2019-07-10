@@ -40,7 +40,6 @@ public class Model extends Observable implements Serializable{
     public void refresh_image(){
         if(Model.selected_star == 0){
             filtered_card = card_pool;
-            filtered_card = card_pool;
         } else {
             for(Card cd: card_pool){
                 if (cd.rate.getNumStars() >= selected_star) {

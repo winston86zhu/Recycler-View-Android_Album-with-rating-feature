@@ -53,6 +53,7 @@ public class TopBar implements Observer {
                 model.clear_image();
                 loaded = false;
                 Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Cleared images", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                model.refresh_image();
             }
         });
 
