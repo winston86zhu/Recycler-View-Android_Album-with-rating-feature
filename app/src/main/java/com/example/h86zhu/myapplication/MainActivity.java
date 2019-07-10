@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
 
         model = new Model(this);
+        try {
+            model.pre_load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         recList.setLayoutManager(llm);
         Card_Adpater ca = new Card_Adpater(this,model);

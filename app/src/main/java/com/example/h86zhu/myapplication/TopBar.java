@@ -61,7 +61,9 @@ public class TopBar implements Observer {
             public void onClick(View v) {
                 if (!loaded) {
                     try {
+
                         model.pre_load();
+                        System.out.println(model.card_pool.size());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -18,6 +18,7 @@ public class Model extends Observable implements Serializable{
     public static int selected_star = 0;
     public Context context;
     public ArrayList<Card> card_pool;
+    public ArrayList<Card> filtered_card;
     String[] urls = {
             "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/bunny.jpg",
             "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/chinchilla.jpg",
@@ -34,6 +35,19 @@ public class Model extends Observable implements Serializable{
     public Model(Context context) {
         this.card_pool = new ArrayList<>();
         this.context = context;
+    }
+
+    public void refresh_image(){
+        if(Model.selected_star == 0){
+            filtered_card = card_pool;
+            filtered_card = card_pool;
+        } else {
+            for(Card cd: card_pool){
+                if (cd.rate.getNumStars() >= selected_star) {
+                    this.filtered_card.add(cd);
+                }
+            }
+        }
     }
 
 
