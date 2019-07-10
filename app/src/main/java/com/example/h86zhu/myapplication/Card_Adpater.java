@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Card cd = card_arr.get(position);
+        //holder.cardv = cd.imv.image
+        holder.imgv = cd.imv.image;
+
 
     }
 
@@ -52,10 +56,12 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         protected CardView cardv;
+        protected ImageView imgv;
 
         public ViewHolder(View v) {
             super(v);
             cardv = (CardView) v.findViewById(R.id.cd_view);
+            imgv = v.findViewById(R.id.im1);
         }
 
     }
