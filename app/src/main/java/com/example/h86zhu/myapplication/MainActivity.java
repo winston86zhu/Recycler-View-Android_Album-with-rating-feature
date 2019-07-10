@@ -9,22 +9,12 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class  MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public Model model;
     public static ArrayList<Card> image_gal;
-    String[] urls = {
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/bunny.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/chinchilla.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/doggo.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/fox.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/hamster.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/husky.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/kitten.png",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/loris.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/puppy.jpg",
-            "https://www.student.cs.uwaterloo.ca/~cs349/w19/assignments/images/sleepy.png"
-    };
+    public TopBar tbar;
+
 
 
     @Override
@@ -42,6 +32,7 @@ public class  MainActivity extends AppCompatActivity {
         recList.setLayoutManager(llm);
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
+        tbar = new TopBar(this, model);
 
 /*
 
