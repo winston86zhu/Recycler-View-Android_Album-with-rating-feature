@@ -15,10 +15,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Model implements Serializable{
-    public int selected_star = 0;
-    public Context context;
-    public ArrayList<Card> card_pool;
-    public ArrayList<IView> observers;
+    public transient int selected_star = 0;
+    public transient Context context;
+    public ArrayList<CardImage> card_pool;
+    public transient ArrayList<IView> observers;
 
     String[] urls = {
             "https://www.student.cs.uwaterloo.ca/~cs349/s19/assignments/images/bunny.jpg",
@@ -54,7 +54,7 @@ public class Model implements Serializable{
 
             Card cd = new Card(context, cdi);
             cd.rate = (RatingBar) cd.findViewById(R.id.b1);
-            this.card_pool.add(cd);
+            this.card_pool.add(cdi);
         }
         notifyViews();
     }

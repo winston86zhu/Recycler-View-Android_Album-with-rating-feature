@@ -22,7 +22,7 @@ public class TopBar implements IView {
     public Context context;
     public View backingView;
     public Model model;
-    public static boolean loaded = false;
+    public boolean loaded = false;
 
 
     public TopBar(Context c, Model m){

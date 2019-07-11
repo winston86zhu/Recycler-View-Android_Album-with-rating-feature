@@ -20,7 +20,7 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     private Context my_context;
     public Model model;
     public ArrayList<Card> card_arr;
-    public ArrayList<Card> filtered_card;
+    public ArrayList<CardImage> filtered_card;
 
     public Card_Adpater(Context c, Model m) {
         this.my_context = c;
@@ -32,13 +32,14 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     }
 
 
+
     public void refresh_image(){
         this.filtered_card = new ArrayList<>();
         if(model.selected_star == 0){
             filtered_card = model.card_pool;
         } else {
-            for(Card cd: this.model.card_pool){
-                if (cd.imv.userRating >= model.selected_star) {
+            for(CardImage cd: this.model.card_pool){
+                if (cd.userRating >= model.selected_star) {
                     this.filtered_card.add(cd);
                 }
             }
@@ -47,7 +48,10 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     }
 
 
-
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.single_card, viewGroup, false);
@@ -58,11 +62,11 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Card cd = filtered_card.get(position);
-//        holder.imv = cd.imv;
+        CardImage cdi = filtered_card.get(position);
+        holder.imv.setImageBitmap(cdi.bitmap);
 
         //holder.rtb = cd.rate;
-        holder.cardv = cd;
+        //holder.cardv = cd;
 
         //((Card) holder.cardv).updateView();
     }
@@ -74,15 +78,15 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cardv;
+        //public CardView cardv;
         public ImageView imv;
         //public RatingBar rtb;
 
         public ViewHolder(View v) {
             super(v);
-//            imv = v.findViewById(R.id.im1);
+            imv =  (ImageView) v.findViewById(R.id.im1);
             //rtb = v.findViewById(R.id.b1);
-            cardv = v.findViewById(R.id.cd_view);
+            //cardv = v.findViewById(R.id.cd_view);
 
         }
 

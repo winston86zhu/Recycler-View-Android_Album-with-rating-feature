@@ -23,13 +23,15 @@ public class MainActivity extends AppCompatActivity implements IView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.model = new Model(this);
-        this.model.addObserver(this);
-        tbar = new TopBar(this, model);
+
         recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         card_list = new ArrayList<>();
+
+        this.model = new Model(this);
+        this.model.addObserver(this);
+        tbar = new TopBar(this, model);
 
 
 
@@ -37,11 +39,12 @@ public class MainActivity extends AppCompatActivity implements IView{
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
 
-    /*    try {
+        try {
             model.pre_load();
+            tbar.loaded = true;
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
 
