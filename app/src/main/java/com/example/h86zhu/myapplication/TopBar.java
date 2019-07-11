@@ -16,7 +16,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class TopBar implements Observer {
+public class TopBar implements IView {
 
     public ArrayList<ImageButton> star_arr;
     public Context context;
@@ -28,6 +28,7 @@ public class TopBar implements Observer {
     public TopBar(Context c, Model m){
         model = m;
         context = c;
+        this.model.addObserver(this);
 
         this.backingView = ((Activity) c).findViewById(R.id.action_bar);
         this.star_arr = new ArrayList<>();
@@ -53,7 +54,6 @@ public class TopBar implements Observer {
                 model.clear_image();
                 loaded = false;
                 Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Cleared images", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                model.refresh_image();
             }
         });
 
@@ -62,7 +62,6 @@ public class TopBar implements Observer {
             public void onClick(View v) {
                 if (!loaded) {
                     try {
-
                         model.pre_load();
                         System.out.println(model.card_pool.size());
                     } catch (IOException e) {
@@ -85,7 +84,6 @@ public class TopBar implements Observer {
         });
 
     }
-
     private class StarListener implements View.OnClickListener {
         int pos;
         public StarListener (int position) {
@@ -94,24 +92,20 @@ public class TopBar implements Observer {
 
         @Override
         public void onClick(View v) {
-            Model.selected_star = (pos+1);
-            for (int i=0; i<model.selected_star; ++i) {
-                star_arr.get(i).setImageResource(android.R.drawable.star_on);
-            }
-            for (int i=model.selected_star; i<5; ++i) {
-                star_arr.get(i).setImageResource(android.R.drawable.star_off);
-            }
+            model.selected_star = (pos+1);
+            model.notifyViews();
         }
     }
 
 
 
     @Override
-    public void update(Observable observable, Object o) {
-        Drawable emptyStar = ContextCompat.getDrawable(context, R.drawable.empty_star);
-        Drawable filledStar = ContextCompat.getDrawable(context, R.drawable.filled_star);
-        Resources res;
-
-
+    public void updateView() {
+        for (int i=0; i<model.selected_star; ++i) {
+            star_arr.get(i).setImageResource(android.R.drawable.star_on);
+        }
+        for (int i=model.selected_star; i<5; ++i) {
+            star_arr.get(i).setImageResource(android.R.drawable.star_off);
+        }
     }
 }

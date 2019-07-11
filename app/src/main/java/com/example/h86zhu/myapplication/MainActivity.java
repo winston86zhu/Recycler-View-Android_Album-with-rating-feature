@@ -10,35 +10,40 @@ import android.view.MenuItem;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IView{
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public Model model;
-    public static ArrayList<Card> image_gal;
+    public RecyclerView recList;
     public TopBar tbar;
+    public ArrayList<Card> card_list;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<Card> contacts;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         setContentView(R.layout.activity_main);
-        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+        this.model = new Model(this);
+        this.model.addObserver(this);
+        tbar = new TopBar(this, model);
+        recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
+        card_list = new ArrayList<>();
 
-        model = new Model(this);
-        try {
-            model.pre_load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         recList.setLayoutManager(llm);
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
-        tbar = new TopBar(this, model);
+
+    /*    try {
+            model.pre_load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
 
 /*
 
@@ -75,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -89,4 +99,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void updateView() {
+        ((Card_Adpater)this.recList.getAdapter()).refresh_image();
+    }
 }

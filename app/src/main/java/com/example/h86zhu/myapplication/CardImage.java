@@ -17,25 +17,23 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CardImage extends AppCompatActivity {
-    public static int userRating;
+public class CardImage implements Serializable {
+    public int userRating;
     public String url;
     public transient Bitmap bitmap;
     public transient Context context;
     public transient Model model;
-    public ImageView image;
 
     public CardImage(String url, Context context, Model m) {
         this.url = url;
         this.userRating = 0;
         this.context = context;
         this.model = m;
-        //this.image = (ImageView) findViewById(R.id.im1);
-       // new DownloadImageTask().execute(url);
+       // this.image = (ImageView) findViewById(R.id.im1);
+
         new DownloadImageTask().execute(url);
-
-
     }
+
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         //private CardImage imageModel;
@@ -58,6 +56,7 @@ public class CardImage extends AppCompatActivity {
 
         protected void onPostExecute(Bitmap result) {
             bitmap = result;
+
         }
     }
 
