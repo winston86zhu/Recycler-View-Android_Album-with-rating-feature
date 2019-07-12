@@ -2,18 +2,12 @@ package com.example.h86zhu.myapplication;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.ColorSpace;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageButton;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 
 public class TopBar implements IView {
@@ -54,6 +48,7 @@ public class TopBar implements IView {
                 model.clear_image();
                 loaded = false;
                 Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Cleared images", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                model.notifyViews();
             }
         });
 
@@ -63,7 +58,6 @@ public class TopBar implements IView {
                 if (!loaded) {
                     try {
                         model.pre_load();
-                        System.out.println(model.card_pool.size());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -80,6 +74,7 @@ public class TopBar implements IView {
             @Override
             public void onClick(View v) {
                 model.selected_star = 0;
+                model.notifyViews();
             }
         });
 

@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements IView{
@@ -39,12 +38,14 @@ public class MainActivity extends AppCompatActivity implements IView{
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
 
+/*
         try {
             model.pre_load();
             tbar.loaded = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+*/
 
 
 
