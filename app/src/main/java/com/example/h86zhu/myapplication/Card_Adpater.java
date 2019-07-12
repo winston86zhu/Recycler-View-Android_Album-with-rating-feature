@@ -39,12 +39,14 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
             filtered_card = model.card_pool;
         } else {
             for(CardImage cd: this.model.card_pool){
+                System.out.println("Image" + 1 + " has" + cd.userRating + " starts");
                 if (cd.userRating >= model.selected_star) {
                     this.filtered_card.add(cd);
                 }
             }
         }
         System.out.println("filtered card list has " + filtered_card.size());
+        //System.out.println("Model Selected Star has " + model.selected_star);
     }
 
 
@@ -58,6 +60,8 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
         ViewHolder pvh = new ViewHolder(v);
         return pvh;
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {

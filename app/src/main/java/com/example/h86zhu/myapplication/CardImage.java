@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class CardImage implements Serializable {
     public int userRating;
     public String url;
-    public transient Bitmap bitmap;
-    public transient Context context;
-    public transient Model model;
+    public Bitmap bitmap;
+    public Context context;
+    public Model model;
 
     public CardImage(String url, Context context, Model m) {
         this.url = url;
@@ -57,6 +57,12 @@ public class CardImage implements Serializable {
         protected void onPostExecute(Bitmap result) {
             bitmap = result;
 
+        }
+    }
+
+    public void notifyViews() {
+        for (IView view : model.observers) {
+            view.updateView();
         }
     }
 

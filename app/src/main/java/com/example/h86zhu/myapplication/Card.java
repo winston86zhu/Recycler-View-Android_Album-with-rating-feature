@@ -18,6 +18,7 @@ public class Card extends CardView implements IView {
     public CardImage imv;
     public RatingBar rate;
     public Context ct;
+    public int user_rate;
 
 
     public Card(Context c, CardImage imv){
@@ -30,15 +31,23 @@ public class Card extends CardView implements IView {
 
     @Override
     public void updateView() {
+        this.rate = (RatingBar) this.findViewById(R.id.b1);
+        rate.setRating(imv.userRating);
         this.rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 imv.userRating = (int) rating;
+                imv.model.notifyViews();
+                user_rate =(int) rating;
                 rate.setRating((int) rating);
             }
         });
 
         ImageView iv = (ImageView) this.findViewById(R.id.im1);
         iv.setImageBitmap(this.imv.bitmap);
+
+        this.user_rate = rate.getNumStars();
+
     }
 
     //new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute("http://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png");

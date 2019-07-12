@@ -24,28 +24,30 @@ public class MainActivity extends AppCompatActivity implements IView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recList = (RecyclerView) findViewById(R.id.cardList);
-        recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+
+
         card_list = new ArrayList<>();
 
         this.model = new Model(this);
         this.model.addObserver(this);
         tbar = new TopBar(this, model);
 
-
-
+        recList = (RecyclerView) findViewById(R.id.cardList);
+        //recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
         recList.setLayoutManager(llm);
         Card_Adpater ca = new Card_Adpater(this,model);
-        recList.setAdapter(ca);
 
-        try {
+        recList.setAdapter(ca);
+        updateView();
+
+ /*       try {
             model.pre_load();
             tbar.loaded = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
 
 
 /*
@@ -102,8 +104,11 @@ public class MainActivity extends AppCompatActivity implements IView{
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public void updateView() {
         ((Card_Adpater)this.recList.getAdapter()).refresh_image();
+        ((Card_Adpater)this.recList.getAdapter()).notifyDataSetChanged();
     }
 }
