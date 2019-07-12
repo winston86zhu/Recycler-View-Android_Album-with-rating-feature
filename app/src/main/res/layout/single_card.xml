@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     tools:context=".MainActivity">
+
+    <data>
+        <variable
+            name="rating"
+            type="com.example.h86zhu.myapplication.CardImage"
+            />
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cd_view"
@@ -31,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
+                android:rating="@={rating.userRating}"
                 android:stepSize="1.0" />
 
         </LinearLayout>
@@ -38,3 +48,4 @@
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
+</layout>

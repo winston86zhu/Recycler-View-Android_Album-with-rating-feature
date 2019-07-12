@@ -1,32 +1,29 @@
 package com.example.h86zhu.myapplication;
 
 import android.content.Context;
-import android.provider.Telephony;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
-    private Context my_context;
+//    private Context my_context;
     public Model model;
-    public ArrayList<Card> card_arr;
+//    public ArrayList<Card> card_arr;
     public ArrayList<CardImage> filtered_card;
 
     public Card_Adpater(Context c, Model m) {
-        this.my_context = c;
+//        this.my_context = c;
         this.model = m;
         //this.card_arr = m.card_pool;
-        this.card_arr = new ArrayList<>();
+//        this.card_arr = new ArrayList<>();
 
         refresh_image();
     }
@@ -53,24 +50,19 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
         super.onAttachedToRecyclerView(recyclerView);
     }
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.single_card, viewGroup, false);
-        ViewHolder pvh = new ViewHolder(v);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        // Instantiates a layout XML file into its corresponding View objects
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.single_card, parent, false);
+        ViewHolder pvh = new ViewHolder(binding);
         return pvh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         CardImage cdi = filtered_card.get(position);
+        holder.bind(cdi);
         holder.imv.setImageBitmap(cdi.bitmap);
-        holder.rtb.setNumStars(cdi.userRating);
-
-
-        //holder.rtb = cd.rate;
-        //holder.cardv = cd;
-
-        //((Card) holder.cardv).updateView();
     }
 
     @Override
@@ -82,21 +74,20 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
         //public CardView cardv;
         public ImageView imv;
-        public int ratings;
         public RatingBar rtb;
+        private final ViewDataBinding binding;
 
-        public ViewHolder(View v) {
+        public ViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
 
+            imv =  (ImageView) binding.getRoot().findViewById(R.id.im1);
+            rtb = (RatingBar) binding.getRoot().findViewById(R.id.b1);
 
-            super(v);
-
-            imv =  (ImageView) v.findViewById(R.id.im1);
-            //ratings = ((RatingBar) v.findViewById(R.id.b1)).getNumStars();
-            rtb = (RatingBar) v.findViewById(R.id.b1);
-            //rtb.setNumStars(ratings);
-            //rtb = v.findViewById(R.id.b1);
-            //cardv = v.findViewById(R.id.cd_view);
-
+        }
+        public void bind(Object obj) {
+            binding.setVariable(BR.rating, obj);
+            binding.executePendingBindings();
         }
 
     }

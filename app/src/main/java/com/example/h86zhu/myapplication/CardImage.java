@@ -1,24 +1,17 @@
 package com.example.h86zhu.myapplication;
 
-import android.app.Activity;
-import android.arch.lifecycle.ViewModel;
 import android.content.Context;
-import android.content.Intent;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.widget.ImageView;
-
 
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 
-public class CardImage implements Serializable {
+public class CardImage extends BaseObservable implements Serializable {
     public int userRating;
     public String url;
     public transient Bitmap bitmap;
@@ -34,6 +27,21 @@ public class CardImage implements Serializable {
 
         new DownloadImageTask().execute(url);
     }
+
+    @Bindable
+    public int getUserRating(){
+        return userRating;
+    }
+
+    public void setUserRating(int val){
+        if(val != userRating){
+            userRating = val;
+        }
+
+        userRating = val;
+        notifyPropertyChanged(BR.userRating);
+    }
+
 
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
