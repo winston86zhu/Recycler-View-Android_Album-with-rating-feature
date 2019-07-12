@@ -1,8 +1,9 @@
 package com.example.h86zhu.myapplication;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,53 +26,34 @@ public class MainActivity extends AppCompatActivity implements IView{
 
         recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        //LinearLayoutManager llm = new LinearLayoutManager(this);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            GridLayoutManager glm = new GridLayoutManager(this, 2);
+            recList.setLayoutManager(glm);
+        } else {
+            GridLayoutManager glm2 = new GridLayoutManager(this, 1);
+            recList.setLayoutManager(glm2);
+        }
         card_list = new ArrayList<>();
 
         this.model = new Model(this);
         this.model.addObserver(this);
         tbar = new TopBar(this, model);
 
-
-
-        recList.setLayoutManager(llm);
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
+    }
 
-/*
-        try {
-            model.pre_load();
-            tbar.loaded = true;
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            ((GridLayoutManager) recList.getLayoutManager()).setSpanCount(1);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            ((GridLayoutManager) recList.getLayoutManager()).setSpanCount(2);
         }
-*/
-
-
-
-/*
-
-        //dispatch to disfferent classes
-
-        /*model = new Model(this);
-        try {
-            model.pre_load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        setContentView(R.layout.single_card);
-        FloatingActionButton fl_button = (FloatingActionButton) findViewById(R.id.float_button);
-
-        image_gal.add((CardView) findViewById(R.id.cd_view_1));
-        image_gal.add((CardView) findViewById(R.id.cd_view_2));*/
-
-       /* RatingBar rb = findViewById(R.id.b1);
-        rb.getNumStars();
-
-        CardView cv = (CardView) findViewById(R.id.cd_view_1);
-        cv.getChildAt(1);*/
-
     }
 
 
