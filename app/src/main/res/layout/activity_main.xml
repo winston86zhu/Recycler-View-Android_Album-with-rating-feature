@@ -1,48 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
-        <include layout="@layout/top_bar" />
-
-        <LinearLayout
-            android:id="@+id/gallery_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <GridView
-                android:id="@+id/gridview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:columnWidth="200dp"
-                android:gravity="center"
-                android:horizontalSpacing="0dp"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0dp" />
-        </LinearLayout>
-    </LinearLayout>
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_search"
+        android:id="@+id/float_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/refresh" />
+        android:layout_marginStart="300dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginBottom="60dp"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.955"
+        app:srcCompat="@android:drawable/ic_search_category_default" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
