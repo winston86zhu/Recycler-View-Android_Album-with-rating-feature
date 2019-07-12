@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -56,6 +57,7 @@ public class CardImage implements Serializable {
 
         protected void onPostExecute(Bitmap result) {
             bitmap = result;
+            model.notifyViews();
 
         }
     }

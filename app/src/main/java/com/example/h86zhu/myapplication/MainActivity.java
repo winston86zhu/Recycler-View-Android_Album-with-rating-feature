@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements IView{
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    public Model model;
+    public static Model model;
     public RecyclerView recList;
     public TopBar tbar;
     public ArrayList<Card> card_list;
@@ -105,5 +105,6 @@ public class MainActivity extends AppCompatActivity implements IView{
     @Override
     public void updateView() {
         ((Card_Adpater)this.recList.getAdapter()).refresh_image();
+        ((Card_Adpater)this.recList.getAdapter()).notifyDataSetChanged();
     }
 }

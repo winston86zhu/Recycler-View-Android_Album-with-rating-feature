@@ -15,7 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Model implements Serializable{
-    public transient int selected_star = 0;
+    public int selected_star = 0;
     public transient Context context;
     public ArrayList<CardImage> card_pool;
     public transient ArrayList<IView> observers;

@@ -64,6 +64,8 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
         CardImage cdi = filtered_card.get(position);
         holder.imv.setImageBitmap(cdi.bitmap);
+        holder.rtb.setNumStars(cdi.userRating);
+
 
         //holder.rtb = cd.rate;
         //holder.cardv = cd;
@@ -80,11 +82,18 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
         //public CardView cardv;
         public ImageView imv;
-        //public RatingBar rtb;
+        public int ratings;
+        public RatingBar rtb;
 
         public ViewHolder(View v) {
+
+
             super(v);
+
             imv =  (ImageView) v.findViewById(R.id.im1);
+            //ratings = ((RatingBar) v.findViewById(R.id.b1)).getNumStars();
+            rtb = (RatingBar) v.findViewById(R.id.b1);
+            //rtb.setNumStars(ratings);
             //rtb = v.findViewById(R.id.b1);
             //cardv = v.findViewById(R.id.cd_view);
 

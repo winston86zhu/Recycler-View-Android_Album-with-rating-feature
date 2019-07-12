@@ -24,16 +24,22 @@ public class Card extends CardView implements IView {
         super(c);
         this.imv = imv;
         ct = c;
+
     }
 
 
 
     @Override
     public void updateView() {
+        this.rate = findViewById(R.id.b1);
+//        rate.setRating(imv.userRating);
+        System.out.println("This updateview is called");
         this.rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            public void onRatingChanged(RatingBar rate, float rating, boolean fromUser) {
+                System.out.println("Rate Bar changed! Now value is " + (int)rating);
                 imv.userRating = (int) rating;
                 rate.setRating((int) rating);
+                MainActivity.model.notifyViews();
             }
         });
 
