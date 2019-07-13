@@ -29,20 +29,15 @@ public class MainActivity extends AppCompatActivity implements IView{
             recList.setLayoutManager(glm2);
         }
 
-
-
         this.model = new Model(this);
         this.model.addObserver(this);
 
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
         tbar = new TopBar(this, model);
-
-
     }
 
-
-
+    
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

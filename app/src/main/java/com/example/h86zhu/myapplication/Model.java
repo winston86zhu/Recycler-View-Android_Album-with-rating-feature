@@ -1,18 +1,11 @@
 package com.example.h86zhu.myapplication;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 public class Model implements Serializable{
     public int selected_star = 0;
@@ -43,11 +36,6 @@ public class Model implements Serializable{
 
 
     public void pre_load() throws IOException {
-//        URL url = new URL("https://www.student.cs.uwaterloo.ca/~cs349/s19/assignments/bunny.jpg");
-//        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        ImageView iv_bunny = new ImageView(context);
-//        iv_bunny.setImageBitmap(bmp);
-        //image_pool.add(iv_bunny);
 
         for(int i = 0; i < 10; i++) {
             CardImage cdi = new CardImage(urls[i], context, this);

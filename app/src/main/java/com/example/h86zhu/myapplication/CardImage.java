@@ -14,16 +14,15 @@ import java.io.Serializable;
 public class CardImage extends BaseObservable implements Serializable {
     public int userRating;
     public String url;
-    public  Bitmap bitmap;
-    public  Context context;
-    public  Model model;
+    public Bitmap bitmap;
+    public Context context;
+    public Model model;
 
     public CardImage(String url, Context context, Model m) {
         this.url = url;
         this.userRating = 0;
         this.context = context;
         this.model = m;
-       // this.image = (ImageView) findViewById(R.id.im1);
         new DownloadImageTask().execute(url);
     }
 
