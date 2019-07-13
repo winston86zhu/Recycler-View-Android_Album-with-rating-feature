@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements IView{
         tbar = new TopBar(this, model);
     }
 
-    
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
