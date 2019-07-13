@@ -60,8 +60,6 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.single_card, parent, false);
 
-
-
         ViewHolder pvh = new ViewHolder(binding);
         return pvh;
     }

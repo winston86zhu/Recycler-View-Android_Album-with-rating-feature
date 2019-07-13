@@ -48,6 +48,8 @@ public class TopBar implements IView {
                 model.clear_image();
                 loaded = false;
                 Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Cleared images", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                model.selected_star = 0;
+                model.notifyViews();
                 model.notifyViews();
             }
         });
@@ -63,7 +65,9 @@ public class TopBar implements IView {
                     }
                     Snackbar.make(backingView.getRootView().findViewById(R.id.cardList),
                             "Images Loaded", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    model.selected_star = 0;
                     loaded = true;
+                    model.notifyViews();
                 } else {
                     Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Images already existed", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 }
