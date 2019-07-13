@@ -1,13 +1,17 @@
 package com.example.h86zhu.myapplication;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
@@ -18,11 +22,15 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     public Model model;
     public ArrayList<ImageView> imv_arr;
     public ArrayList<CardImage> filtered_card;
+    public Context c;
+    public View Main_View;
 
-    public Card_Adpater(Model m) {
+    public Card_Adpater(Context con, Model m) {
         this.model = m;
         imv_arr = new ArrayList<>();
         refresh_image();
+        this.c = con;
+        Main_View = (((Activity) con).findViewById(R.id.action_bar)).getRootView();
     }
 
 
@@ -61,8 +69,7 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final CardImage cdi = filtered_card.get(position);
-        holder.bind(cdi);
-        holder.imv.setImageBitmap(cdi.bitmap);
+
 
 
         //final ImageView cd_imv = (ImageView) binding_root.findViewById(R.id.im1);
@@ -83,10 +90,25 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
                 });
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.setCancelable(true);
-                dialog.show();
+                Snackbar.make(Main_View.findViewById(R.id.cardList), "Image Zoom-in", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
 
+                dialog.show();
             }
         });
+
+        holder.imb.setOnClickListener(
+                new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cdi.userRating = 0;
+                holder.ratingBar.setRating(0);
+                Snackbar.make(Main_View.findViewById(R.id.cardList), "Cleared Individual Rating", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                //model.notifyViews();
+            }
+        });
+
+        holder.bind(cdi);
+        holder.imv.setImageBitmap(cdi.bitmap);
     }
 
     @Override
@@ -99,6 +121,7 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
         //public CardView cardv;
         public ImageView imv;
         public RatingBar ratingBar;
+        public ImageButton imb;
         private final ViewDataBinding binding;
 
         public ViewHolder(ViewDataBinding binding) {
@@ -107,14 +130,15 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
             imv =  (ImageView) binding.getRoot().findViewById(R.id.im1);
             ratingBar = (RatingBar) binding.getRoot().findViewById(R.id.b1);
+            imb = (ImageButton) binding.getRoot().findViewById(R.id.imb1);
 
-            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+           /* ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                     System.out.println("HHHHA CHANGE RATE");
                     MainActivity.model.notifyViews();
 
                 }
-            });
+            });*/
 
         }
         public void bind(Object obj) {

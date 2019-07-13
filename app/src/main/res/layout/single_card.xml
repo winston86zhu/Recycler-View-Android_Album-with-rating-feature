@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
@@ -35,13 +36,27 @@
                 android:contentDescription="@string/display_image"
                 android:scaleType="fitCenter" />
 
-            <RatingBar
-                android:id="@+id/b1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:rating="@={rating.userRating}"
-                android:stepSize="1.0" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imb1"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+                <RatingBar
+                    android:id="@+id/b1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:numStars="5"
+                    android:rating="@={rating.userRating}"
+                    android:stepSize="1.0" />
+            </LinearLayout>
 
         </LinearLayout>
 

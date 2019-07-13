@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements IView{
         this.model.addObserver(this);
         tbar = new TopBar(this, model);
 
-        Card_Adpater ca = new Card_Adpater(model);
+        Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
     }
 

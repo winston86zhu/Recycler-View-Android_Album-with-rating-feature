@@ -62,10 +62,10 @@ public class TopBar implements IView {
                         e.printStackTrace();
                     }
                     Snackbar.make(backingView.getRootView().findViewById(R.id.cardList),
-                            "Loaded images", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                            "Images Loaded", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     loaded = true;
                 } else {
-                    Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Images already loaded", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Images already existed", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 }
             }
         });
