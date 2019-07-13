@@ -1,11 +1,12 @@
 package com.example.h86zhu.myapplication;
 
-import android.content.Context;
+import android.app.Dialog;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -16,15 +17,15 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
 //    private Context my_context;
     public Model model;
-//    public ArrayList<Card> card_arr;
+    public ArrayList<ImageView> imv_arr;
     public ArrayList<CardImage> filtered_card;
 
-    public Card_Adpater(Context c, Model m) {
+    public Card_Adpater(Model m) {
 //        this.my_context = c;
         this.model = m;
         //this.card_arr = m.card_pool;
 //        this.card_arr = new ArrayList<>();
-
+        imv_arr = new ArrayList<>();
         refresh_image();
     }
 
@@ -54,15 +55,43 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
         // Instantiates a layout XML file into its corresponding View objects
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.single_card, parent, false);
+
+
+
         ViewHolder pvh = new ViewHolder(binding);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CardImage cdi = filtered_card.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final CardImage cdi = filtered_card.get(position);
         holder.bind(cdi);
         holder.imv.setImageBitmap(cdi.bitmap);
+
+
+        //final ImageView cd_imv = (ImageView) binding_root.findViewById(R.id.im1);
+        holder.imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("HHHHHHH lCIKEd");
+                final Dialog dialog = new Dialog(holder.imv.getContext());
+                dialog.setContentView(R.layout.image_click);
+                ImageView iv = (ImageView) dialog.findViewById(R.id.iclicker);
+
+                iv.setImageBitmap(cdi.bitmap);
+                //iv.setImageDrawable(cd_imv.getDrawable());
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                dialog.setCancelable(true);
+                dialog.show();
+
+            }
+        });
     }
 
     @Override

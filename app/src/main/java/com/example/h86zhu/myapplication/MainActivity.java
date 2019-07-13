@@ -8,16 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements IView{
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public static Model model;
     public RecyclerView recList;
     public TopBar tbar;
-    public ArrayList<Card> card_list;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +28,12 @@ public class MainActivity extends AppCompatActivity implements IView{
             GridLayoutManager glm2 = new GridLayoutManager(this, 1);
             recList.setLayoutManager(glm2);
         }
-        card_list = new ArrayList<>();
 
         this.model = new Model(this);
         this.model.addObserver(this);
         tbar = new TopBar(this, model);
 
-        Card_Adpater ca = new Card_Adpater(this,model);
+        Card_Adpater ca = new Card_Adpater(model);
         recList.setAdapter(ca);
     }
 

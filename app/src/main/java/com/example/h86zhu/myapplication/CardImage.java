@@ -28,6 +28,7 @@ public class CardImage extends BaseObservable implements Serializable {
         new DownloadImageTask().execute(url);
     }
 
+    /*To bilaterally bind data between model field and xml view */
     @Bindable
     public int getUserRating(){
         return userRating;
