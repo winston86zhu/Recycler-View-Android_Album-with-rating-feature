@@ -29,12 +29,16 @@ public class MainActivity extends AppCompatActivity implements IView{
             recList.setLayoutManager(glm2);
         }
 
+
+
         this.model = new Model(this);
         this.model.addObserver(this);
-        tbar = new TopBar(this, model);
 
         Card_Adpater ca = new Card_Adpater(this,model);
         recList.setAdapter(ca);
+        tbar = new TopBar(this, model);
+
+
     }
 
 
@@ -81,6 +85,19 @@ public class MainActivity extends AppCompatActivity implements IView{
     @Override
     public void updateView() {
         ((Card_Adpater)this.recList.getAdapter()).refresh_image();
-        ((Card_Adpater)this.recList.getAdapter()).notifyDataSetChanged();
+        /*
+        You use your RecyclerView instance and inside the post method a new Runnable added to the message queue.
+        The runnable will be run on the user interface thread.
+        This is a limit for Android to access the UI thread from background (e.g. inside a method which will be run in a background thread).
+        for more you run it on UI thread if you needed.
+         */
+        recList.post(new Runnable()
+        {
+            @Override
+            public void run() {
+                ((Card_Adpater)recList.getAdapter()).notifyDataSetChanged();
+            }
+        });
+        //((Card_Adpater)this.recList.getAdapter()).notifyDataSetChanged();
     }
 }

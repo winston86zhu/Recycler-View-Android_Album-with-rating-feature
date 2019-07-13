@@ -101,7 +101,16 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
                 cdi.userRating = 0;
                 holder.ratingBar.setRating(0);
                 Snackbar.make(Main_View.findViewById(R.id.cardList), "Cleared Individual Rating", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                //model.notifyViews();
+            }
+        });
+
+        holder.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                System.out.println("HHHHA CHANGE RATE");
+                cdi.userRating = (int) rating;
+                holder.ratingBar.setRating(rating);
+                Snackbar.make(Main_View.findViewById(R.id.cardList), "Rating Changed", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                model.notifyViews();
             }
         });
 
