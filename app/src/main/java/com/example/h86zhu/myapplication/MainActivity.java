@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity implements IView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
 
         recList = (RecyclerView) findViewById(R.id.cardList);
@@ -29,7 +32,13 @@ public class MainActivity extends AppCompatActivity implements IView{
             recList.setLayoutManager(glm2);
         }
 
-        this.model = new Model(this);
+        if (savedInstanceState != null) {
+            this.model = (Model) savedInstanceState.getSerializable("model");
+            this.model.context = this;
+        } else {
+            this.model = new Model(this);
+        }
+        //this.model = new Model(this);
         this.model.addObserver(this);
 
         Card_Adpater ca = new Card_Adpater(this,model);
@@ -94,5 +103,16 @@ public class MainActivity extends AppCompatActivity implements IView{
             }
         });
         //((Card_Adpater)this.recList.getAdapter()).notifyDataSetChanged();
+    }
+
+    /* Get From Android Official Guailine */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.clear();
+        // Save the user's current game state
+        savedInstanceState.putSerializable("model", this.model);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 }
