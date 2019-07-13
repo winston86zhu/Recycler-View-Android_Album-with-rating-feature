@@ -109,7 +109,7 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
                 System.out.println("HHHHA CHANGE RATE");
                 cdi.userRating = (int) rating;
                 holder.ratingBar.setRating(rating);
-                Snackbar.make(Main_View.findViewById(R.id.cardList), "Rating Changed", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                //Snackbar.make(Main_View.findViewById(R.id.cardList), "Rating Changed", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 model.notifyViews();
             }
         });

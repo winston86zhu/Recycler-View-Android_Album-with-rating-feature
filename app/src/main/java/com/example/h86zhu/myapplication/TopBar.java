@@ -69,7 +69,19 @@ public class TopBar implements IView {
                     loaded = true;
                     model.notifyViews();
                 } else {
-                    Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Images already existed", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    /*
+                    Loading and Clearing Button will set current filter to 0
+                     */
+                    Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Reload Image", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    model.selected_star = 0;
+                    model.clear_image();
+                    try {
+                        model.pre_load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    model.notifyViews();
+
                 }
             }
         });
