@@ -14,9 +14,9 @@ import java.io.Serializable;
 public class CardImage extends BaseObservable implements Serializable {
     public int userRating;
     public String url;
-    public transient Bitmap bitmap;
-    public transient Context context;
-    public transient Model model;
+    public  Bitmap bitmap;
+    public  Context context;
+    public  Model model;
 
     public CardImage(String url, Context context, Model m) {
         this.url = url;
@@ -24,7 +24,6 @@ public class CardImage extends BaseObservable implements Serializable {
         this.context = context;
         this.model = m;
        // this.image = (ImageView) findViewById(R.id.im1);
-
         new DownloadImageTask().execute(url);
     }
 
@@ -44,12 +43,8 @@ public class CardImage extends BaseObservable implements Serializable {
     }
 
 
-
+    /*This is referred from a Piazza post */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        //private CardImage imageModel;
-//        public DownloadImageTask(CardImage imageModel) {
-//            this.imageModel = imageModel;
-//        }
 
         protected Bitmap doInBackground(String... urls) {
             String url = urls[0];

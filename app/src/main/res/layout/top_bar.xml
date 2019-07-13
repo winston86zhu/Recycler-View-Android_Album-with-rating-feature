@@ -18,10 +18,10 @@
             android:id="@+id/topbar_text"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/Fotag_WZ"
             android:textColor="#FCFFFFFF"
-            android:textSize="28sp" />
+            android:textSize="24sp" />
 
         <Space
             android:id="@+id/top_bar_space"

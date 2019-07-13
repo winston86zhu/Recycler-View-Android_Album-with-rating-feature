@@ -15,16 +15,12 @@ import java.util.ArrayList;
 
 public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
-//    private Context my_context;
     public Model model;
     public ArrayList<ImageView> imv_arr;
     public ArrayList<CardImage> filtered_card;
 
     public Card_Adpater(Model m) {
-//        this.my_context = c;
         this.model = m;
-        //this.card_arr = m.card_pool;
-//        this.card_arr = new ArrayList<>();
         imv_arr = new ArrayList<>();
         refresh_image();
     }
@@ -73,7 +69,6 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
         holder.imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("HHHHHHH lCIKEd");
                 final Dialog dialog = new Dialog(holder.imv.getContext());
                 dialog.setContentView(R.layout.image_click);
                 ImageView iv = (ImageView) dialog.findViewById(R.id.iclicker);
@@ -86,7 +81,7 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
                         dialog.dismiss();
                     }
                 });
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.setCancelable(true);
                 dialog.show();
 
@@ -103,7 +98,7 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
 
         //public CardView cardv;
         public ImageView imv;
-        public RatingBar rtb;
+        public RatingBar ratingBar;
         private final ViewDataBinding binding;
 
         public ViewHolder(ViewDataBinding binding) {
@@ -111,7 +106,15 @@ public class Card_Adpater extends RecyclerView.Adapter<Card_Adpater.ViewHolder>{
             this.binding = binding;
 
             imv =  (ImageView) binding.getRoot().findViewById(R.id.im1);
-            rtb = (RatingBar) binding.getRoot().findViewById(R.id.b1);
+            ratingBar = (RatingBar) binding.getRoot().findViewById(R.id.b1);
+
+            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    System.out.println("HHHHA CHANGE RATE");
+                    MainActivity.model.notifyViews();
+
+                }
+            });
 
         }
         public void bind(Object obj) {
