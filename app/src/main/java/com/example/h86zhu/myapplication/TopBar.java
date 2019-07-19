@@ -50,7 +50,6 @@ public class TopBar implements IView {
                 Snackbar.make(backingView.getRootView().findViewById(R.id.cardList), "Cleared images", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 model.selected_star = 0;
                 model.notifyViews();
-                model.notifyViews();
             }
         });
 
